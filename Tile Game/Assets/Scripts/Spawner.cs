@@ -30,6 +30,7 @@ public class Spawner : MonoBehaviour
             car.transform.parent = this.transform; 
             car.GetComponent<SpriteRenderer>().sprite = (Sprite)sprites[Random.Range(0,sprites.Length)];
             car.AddComponent<BoxCollider2D>();
+            car.GetComponent<BoxCollider2D>().isTrigger = true;
             size = car.GetComponent<BoxCollider2D>().size;
             car.GetComponent<BoxCollider2D>().size = new Vector2(size.x + (float)0.12, size.y);
         }

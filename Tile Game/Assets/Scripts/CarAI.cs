@@ -16,14 +16,27 @@ public class CarAI : MonoBehaviour
     void OnBecameInvisible(){
         Destroy(gameObject);
     }
-    void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.tag == "Car"){
-            collision.gameObject.GetComponent<CarAI>().velocity = new Vector2(0,0);
+    void OnTriggerEnter2D(Collider2D col){
+        string tag = col.gameObject.tag;
+        switch(tag){
+            case "Car":
+                col.gameObject.GetComponent<CarAI>().velocity = new Vector2(0,0);
+                break;
+            case "Traffic_Light":
+                velocity = new Vector2(0,0);
+                break;
         }
     }
-    void OnCollisionExit2D(Collision2D collision){
-        if(collision.gameObject.tag == "Car"){
-            StartCoroutine(start());
+    void OnTriggerExit2D(Collider2D col){
+        
+        string tag = col.gameObject.tag;
+        switch(tag){
+            case "Car":
+                StartCoroutine(start());
+                break;
+            case "Traffic_Light":
+                StartCoroutine(start());
+                break;
         }
     }
     IEnumerator start(){
